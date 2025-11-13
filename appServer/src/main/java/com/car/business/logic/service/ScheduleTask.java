@@ -22,7 +22,10 @@ public class ScheduleTask {
     @Autowired
     private AlquilerService alquilerService;
     
-    @Scheduled(cron = "0 07 22 * * *", zone = "America/Argentina/Mendoza")
+    @Scheduled(cron = "0 35 22 * * *", zone = "America/Argentina/Mendoza")
+    @Scheduled(cron = "0 30 18 * * *", zone = "America/Argentina/Mendoza")
+    @Scheduled(cron = "0 25 22 * * *", zone = "America/Argentina/Mendoza")
+    @Scheduled(cron = "0 20 22 * * *", zone = "America/Argentina/Mendoza")
     @Transactional
     public void enviarRecordatios(){
         LocalDate hoyMza = LocalDate.now(ZoneId.of("America/Argentina/Mendoza"));
