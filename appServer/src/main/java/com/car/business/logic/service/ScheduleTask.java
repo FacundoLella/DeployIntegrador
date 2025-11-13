@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.car.business.logic.service.CaracteristicaVehiculoService;
+
+
 import com.car.business.domain.Alquiler;
 
 import jakarta.transaction.Transactional;
@@ -20,9 +23,12 @@ public class ScheduleTask {
     private EmailService emailService;
 
     @Autowired
+    private CaracteristicaVehiculoService caracteristicaVehiculoService;
+
+    @Autowired
     private AlquilerService alquilerService;
 
-    
+
     @Scheduled(cron = "0 30 18 * * *", zone = "America/Argentina/Mendoza")
     @Transactional
     public void enviarRecordatios(){
@@ -35,6 +41,16 @@ public class ScheduleTask {
             emailService.sendEmail(alquiler);
             
         }
+
+        alquileres = alquilerService.buscarAlquileresEmpHoy(hoyMza);
+        for (Alquiler alquiler : alquileres){
+            if (!(alquiler.getVehiculo().getEstadoVehiculo().equals("ALQUILADO"))){
+                alquiler.getVehiculo().setEstadoVehiculo(EstadoVehiculo.ALQUILADO);
+                caracteristicaVehiculoService.sumarCantVehiculoAlquilado(alquiler.getVehiculo().getCaracteristicaVehiculo().getId());
+            }
+            
+        }
+
 
     }
 }

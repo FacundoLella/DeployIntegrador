@@ -84,6 +84,10 @@ public class AlquilerService extends BaseService<Alquiler, AlquilerDto, String> 
         alquiler.setCliente(cliente);
         alquiler.setVehiculo(vehiculo);
         alquiler.setFechaDesde(request.getFechaDesde());
+        if (request.getFechaDesde() != null && request.getFechaDesde().isEqual(LocalDate.now())){
+            vehiculo.setEstadoVehiculo(EstadoVehiculo.ALQUILADO);
+
+        }
         alquiler.setFechaHasta(request.getFechaHasta());
         alquiler.setDocumentacion(documentacion);
         this.alta(alquiler);
