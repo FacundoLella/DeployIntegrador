@@ -55,6 +55,7 @@ com/car/business/mappers/CostoVehiculoMapper.class
 com/car/business/dto/UsuarioDto.class
 com/car/business/logic/service/NacionalidadService.class
 com/car/business/domain/Usuario.class
+com/car/config/DefaultAdminUserInitializer.class
 com/car/business/logic/service/CostoVehiculoService.class
 com/car/business/dto/CaracteristicaVehiculoDto.class
 com/car/seguridad/jwt/JwtAuthenticationEntryPoint.class
